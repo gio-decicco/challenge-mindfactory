@@ -5,7 +5,7 @@ import { CreateSujetoDto } from '../application/dto/create-sujeto.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { CuitValidatorPipe } from 'src/shared/pipes/cuit.validator.pipe';
 
-@Controller('sujeto')
+@Controller('sujetos')
 export class SujetoController {
 
   constructor(private readonly service: SujetoService) {}

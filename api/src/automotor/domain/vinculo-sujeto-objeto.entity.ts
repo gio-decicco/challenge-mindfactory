@@ -1,6 +1,6 @@
 import { SujetoEntity } from "src/sujeto/domain/sujeto.entity";
 import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column, CreateDateColumn } from "typeorm";
-import { ObjetoDeValorEntity } from "../../automotor/domain/objeto-de-valor.entity";
+import { ObjetoDeValorEntity } from "./objeto-de-valor.entity";
 
 @Entity({ name: 'Vinculo_Sujeto_Objeto' })
 export class VinculoSujetoObjetoEntity {

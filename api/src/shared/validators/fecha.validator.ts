@@ -1,6 +1,6 @@
 import { UnprocessableEntityException } from '@nestjs/common';
 
-export function fechaValidator(value: string | number): void {
+export function isFechaValido(value: string | number) : boolean{
   const str = String(value);
 
   if (!/^\d{6}$/.test(str)) {
@@ -27,4 +27,6 @@ export function fechaValidator(value: string | number): void {
       'La fecha de fabricación no puede ser futura',
     );
   }
+
+  return true;
 }

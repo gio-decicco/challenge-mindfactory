@@ -8,21 +8,21 @@ export class VwAutomotoresConDueno {
   @ViewColumn()
   dominio: string;
 
-  @ViewColumn()
-  numero_chasis: string;
+  @ViewColumn({ name: 'numero_chasis' })
+  numeroChasis: string;
 
-  @ViewColumn()
-  numero_motor: string;
+  @ViewColumn({ name: 'numero_motor' })
+  numeroMotor: string;
 
   @ViewColumn()
   color: string;
 
-  @ViewColumn()
-  fecha_fabricacion: number;
+  @ViewColumn({ name: 'fecha_fabricacion' })
+  fechaFabricacion: number;
 
-  @ViewColumn()
-  cuit_dueno: string;
+  @ViewColumn({ name: 'cuit_dueno' })
+  cuitDueno: string;
 
-  @ViewColumn()
-  denominacion_dueno: string;
+  @ViewColumn({ name: 'denominacion_dueno' })
+  denominacionDueno: string;
 }
