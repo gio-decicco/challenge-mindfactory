@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${DB_USER:-mindfactory}
+      POSTGRES_PASSWORD: ${DB_PASS:-mindfactory123}
+      POSTGRES_DB: ${DB_NAME:-mindfactory_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./api/src/database/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  api:
+    build: ./api
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: ${DB_USER:-mindfactory}
+      DB_PASS: ${DB_PASS:-mindfactory123}
+      DB_NAME: ${DB_NAME:-mindfactory_db}
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:

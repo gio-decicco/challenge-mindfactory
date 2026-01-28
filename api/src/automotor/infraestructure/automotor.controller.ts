@@ -34,10 +34,9 @@ export class AutomotorController{
     }
 
     @Put(':dominio')
-    @HttpCode(HttpStatus.CREATED)
     @ApiParam({name: 'dominio', type: 'string'})
     @ApiOperation({ summary: 'Modifica un automotor existente' })
-    @ApiResponse({ status: 201, description: 'Automotor modificado' })
+    @ApiResponse({ status: 200, description: 'Automotor modificado' })
     async update(
         @Param('dominio', DominioValidatorPipe) dominio: string,
         @Body(new AutomotorUpdateValidatorPipe()) dto: AutomotorUpdateDto
