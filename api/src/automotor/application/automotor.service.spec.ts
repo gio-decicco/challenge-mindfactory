@@ -448,11 +448,7 @@ describe('AutomotorService', () => {
       mockAutomotorRepository.delete.mockResolvedValue({ affected: 1 });
       mockObjetoDeValorRepository.delete.mockResolvedValue({ affected: 1 });
 
-      const result = await service.delete('ABC123');
-
-      expect(result).toEqual({
-        message: 'Automotor ABC123 eliminado correctamente',
-      });
+      await expect(service.delete('ABC123')).resolves.toBeUndefined();
       expect(mockAutomotorRepository.findOne).toHaveBeenCalledWith({
         where: { dominio: 'ABC123' },
         relations: ['objetoDeValor'],
@@ -468,14 +464,14 @@ describe('AutomotorService', () => {
       });
     });
 
-    it('should throw UnprocessableEntityException when automotor does not exist', async () => {
+    it('should throw NotFoundException when automotor does not exist', async () => {
       mockAutomotorRepository.findOne.mockResolvedValue(null);
 
       await expect(service.delete('INVALID')).rejects.toThrow(
-        UnprocessableEntityException,
+        NotFoundException,
       );
       await expect(service.delete('INVALID')).rejects.toThrow(
-        'Dominio no encontrado',
+        'Automotor no encontrado',
       );
     });
   });

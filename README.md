@@ -18,6 +18,20 @@ docker compose up -d --build
 docker compose exec api npm run seed
 ```
 
+### Ejecutar tests (backend)
+
+Unit tests:
+
+```bash
+docker compose exec api npm test
+```
+
+E2E tests:
+
+```bash
+docker compose exec api npm run test:e2e
+```
+
 ### Ver logs
 
 ```bash
@@ -38,3 +52,5 @@ docker compose down -v
 
 # Ver documentación Swagger
 # Abrir en navegador: http://localhost:3000/api-docs
+# Frontend corre en
+# Abrir en navegador: http://localhost:4200
