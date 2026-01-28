@@ -1,7 +1,6 @@
 import { InjectRepository } from "@nestjs/typeorm";
 import { Injectable, NotFoundException, UnprocessableEntityException } from "@nestjs/common";
 import { Repository } from "typeorm";
-import { Transactional } from "typeorm-transactional-cls-hooked";
 import { VwAutomotoresConDueno } from "../domain/vw-automotores-con-dueno.entity";
 import { AutomotorCreateDto } from "./dto/automotor.create.dto";
 import { SujetoService } from "src/sujeto/application/sujeto.service";
@@ -39,7 +38,6 @@ export class AutomotorService{
         return toAutomotorResponseDto(automotor);
     }
 
-    @Transactional()
     async create(dto: AutomotorCreateDto) {
 
         let sujeto = await this.obtenerSujeto(dto.cuitDuenio);
@@ -60,7 +58,6 @@ export class AutomotorService{
 
     }
 
-    @Transactional()
     async update(dominio: string, dto: AutomotorUpdateDto){
 
         //validaciones
@@ -95,7 +92,6 @@ export class AutomotorService{
         } as AutomotorResponseDto
     }
 
-    @Transactional()
     async delete(dominio: string){
 
         const automotor = await this.repository.findOne({

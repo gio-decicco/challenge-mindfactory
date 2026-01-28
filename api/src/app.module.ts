@@ -17,7 +17,7 @@ import 'dotenv/config';
       autoLoadEntities: true,
       synchronize: false,
       migrations: ['dist/database/migrations/*.js'],
-      migrationsRun: false, // Se ejecutarán manualmente o desde el servicio
+      migrationsRun: false
     }),
     AutomotorModule,
     SujetoModule,

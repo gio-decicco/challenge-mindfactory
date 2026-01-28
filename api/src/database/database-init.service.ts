@@ -21,7 +21,6 @@ export class DatabaseInitService implements OnModuleInit {
       this.logger.log('Database migrations completed successfully');
     } catch (error) {
       this.logger.error('Error running migrations:', error.message);
-      // No lanzamos el error para que la aplicación pueda iniciar
     }
   }
 }

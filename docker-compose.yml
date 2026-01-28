@@ -23,9 +23,17 @@ services:
       DB_NAME: ${DB_NAME:-mindfactory_db}
       PORT: 3000
     ports:
-      - "3000:3000"
+      - "3001:3000"
     depends_on:
       - postgres
+
+  web:
+    build: ./web
+    ports:
+      - "4200:4200"
+    depends_on:
+      - api
+
 
 volumes:
   postgres_data:

@@ -1,0 +1,53 @@
+<p-dialog
+  header="Crear sujeto"
+  [(visible)]="visible"
+  [modal]="true"
+  [closable]="true"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="onHide()"
+>
+  <form [formGroup]="form" class="flex flex-col gap-3">
+    @if (error; as e) {
+      <p-message severity="error" [text]="e"></p-message>
+    }
+
+    <div class="text-sm text-gray-600">
+      CUIT: <span class="font-semibold">{{ cuit }}</span>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label for="denominacion" class="font-semibold">
+        Denominación <span class="text-red-500">*</span>
+      </label>
+      <input
+        id="denominacion"
+        type="text"
+        pInputText
+        formControlName="denominacion"
+        placeholder="Ej: Juan Pérez"
+        class="w-full"
+      />
+      @if (form.get('denominacion')?.touched && form.get('denominacion')?.hasError('required')) {
+        <small class="text-red-500">Denominación es requerida</small>
+      }
+    </div>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <div class="flex gap-2 justify-end">
+      <p-button
+        label="Cancelar"
+        severity="secondary"
+        (onClick)="close()"
+        [disabled]="loading"
+      ></p-button>
+      <p-button
+        label="Crear"
+        (onClick)="submit()"
+        [loading]="loading"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+

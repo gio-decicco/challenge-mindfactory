@@ -1,0 +1,35 @@
+<p-confirmdialog />
+<p-card class="p-2 h-full m-2 mt-0">
+    <ng-template pTemplate="header">
+        <button pButton class="m-2" type="button" icon="pi pi-plus" (click)="create()">Crear automotor</button>
+        <h3 class="text-center">Automotores</h3>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <p-table 
+            [value]="facade.automotores()" 
+            [columns]="cols"
+            [loading]="facade.loading()">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th *ngFor="let col of cols">{{ col.header }}</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-automotor>
+                <tr>
+                    <th>{{ automotor.dominio }}</th>
+                    <td>{{ automotor.numeroChasis }}</td>
+                    <td>{{ automotor.numeroMotor }}</td>
+                    <td>{{ automotor.color }}</td>
+                    <td>{{ automotor.fechaFabricacion }}</td>
+                    <td>{{ automotor.cuitDueno }}</td>
+                    <td>{{ automotor.denominacionDueno }}</td>
+                    <td>
+                        <button pButton class="m-2" type="button" icon="pi pi-pencil" (click)="edit(automotor.dominio)"></button>
+                        <button pButton severity="danger" type="button" icon="pi pi-trash" (click)="delete(automotor.dominio)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </ng-template>
+</p-card>

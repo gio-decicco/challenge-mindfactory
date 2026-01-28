@@ -1,0 +1,145 @@
+<p-confirmdialog />
+<app-sujeto-create-dialog
+  [cuit]="createSujetoDialogCuit"
+  [visible]="createSujetoDialogVisible"
+  (visibleChange)="onSujetoDialogVisibleChange($event)"
+  (sujetoCreado)="onSujetoCreated()"
+></app-sujeto-create-dialog>
+<p-card header="Crear Nuevo Automotor" class="m-4">
+  <ng-template pTemplate="content">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+      
+      @if (facade.error(); as error) {
+        <p-message severity="error" [text]="error" [closable]="true"></p-message>
+      }
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-2">
+            <label for="dominio" class="font-semibold">
+              Dominio <span class="text-red-500">*</span>
+            </label>
+            <input
+              id="dominio"
+              type="text"
+              pInputText
+              formControlName="dominio"
+              placeholder="Ej: AB123CD"
+              [class.ng-invalid]="form.get('dominio')?.invalid && form.get('dominio')?.touched"
+              class="w-full uppercase"
+              style="text-transform: uppercase"
+            />
+            @if (getFieldError('dominio'); as error) {
+              <small class="text-red-500">{{ error }}</small>
+            }
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="cuitDuenio" class="font-semibold">
+              CUIT del Dueño <span class="text-red-500">*</span>
+            </label>
+            <input
+              id="cuitDuenio"
+              type="text"
+              pInputText
+              formControlName="cuitDuenio"
+              placeholder="11 dígitos"
+              maxlength="11"
+              [class.ng-invalid]="form.get('cuitDuenio')?.invalid && form.get('cuitDuenio')?.touched"
+              class="w-full"
+            />
+            @if (getFieldError('cuitDuenio'); as error) {
+              <small class="text-red-500">{{ error }}</small>
+            }
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="fechaFabricacion" class="font-semibold">
+              Fecha de Fabricación <span class="text-red-500">*</span>
+            </label>
+            <input
+              id="fechaFabricacion"
+              type="text"
+              pInputText
+              formControlName="fechaFabricacion"
+              placeholder="YYYYMM (ej: 202303)"
+              maxlength="6"
+              pattern="[0-9]{6}"
+              [class.ng-invalid]="form.get('fechaFabricacion')?.invalid && form.get('fechaFabricacion')?.touched"
+              class="w-full"
+            />
+            <small class="text-gray-500">Formato: YYYYMM (año y mes, ej: 202303 para marzo 2023)</small>
+            @if (getFieldError('fechaFabricacion'); as error) {
+              <small class="text-red-500">{{ error }}</small>
+            }
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-2">
+            <label for="numeroChasis" class="font-semibold">Número de Chasis</label>
+            <input
+              id="numeroChasis"
+              type="text"
+              pInputText
+              formControlName="numeroChasis"
+              placeholder="Opcional"
+              class="w-full"
+            />
+            @if (getFieldError('numeroChasis'); as error) {
+              <small class="text-red-500">{{ error }}</small>
+            }
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="numeroMotor" class="font-semibold">Número de Motor</label>
+            <input
+              id="numeroMotor"
+              type="text"
+              pInputText
+              formControlName="numeroMotor"
+              placeholder="Opcional"
+              class="w-full"
+            />
+            @if (getFieldError('numeroMotor'); as error) {
+              <small class="text-red-500">{{ error }}</small>
+            }
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="color" class="font-semibold">Color</label>
+            <input
+              id="color"
+              type="text"
+              pInputText
+              formControlName="color"
+              placeholder="Opcional"
+              class="w-full"
+            />
+            @if (getFieldError('color'); as error) {
+              <small class="text-red-500">{{ error }}</small>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-2 justify-end mt-4">
+        <p-button
+          label="Cancelar"
+          icon="pi pi-times"
+          severity="secondary"
+          (onClick)="cancel()"
+          [disabled]="facade.loading()"
+        ></p-button>
+        <p-button
+          type="submit"
+          label="Crear Automotor"
+          icon="pi pi-check"
+          [loading]="facade.loading()"
+          [disabled]="form.invalid || facade.loading()"
+        ></p-button>
+      </div>
+    </form>
+  </ng-template>
+</p-card>
