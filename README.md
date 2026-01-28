@@ -26,11 +26,6 @@ Unit tests:
 docker compose exec api npm test
 ```
 
-E2E tests:
-
-```bash
-docker compose exec api npm run test:e2e
-```
 
 ### Ver logs
 
